@@ -13,7 +13,7 @@ void setup()
 {
   screen = LilyGo();
   screen.initialize();
-  screen.display_settings();
+  screen.display_ticker();
 }
 
 void loop()

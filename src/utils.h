@@ -26,7 +26,7 @@ void draw_text(uint8_t *framebuffer, String text, int x_offset, int y_offset, al
     if (align == CENTER)
         x_offset = (EPD_WIDTH - w) / 2;
     int cursor_y = y_offset + h;
-    Serial.println(String(__FILE__) + "\n Drawing string: " + text + ". x: " + x_offset + " y: " + cursor_y);
+    //Serial.println(String(__FILE__) + "\n Drawing string: " + text + ". x: " + x_offset + " y: " + cursor_y);
     write_string(&font, data, &x_offset, &cursor_y, framebuffer);
 }
 

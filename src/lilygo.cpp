@@ -11,6 +11,7 @@ LilyGo::LilyGo()
     width = EPD_WIDTH;
     height = EPD_HEIGHT;
     font = FiraSans;
+    yfapi = YahooFinanceAPI();
 }
 
 void LilyGo::initialize()
@@ -84,4 +85,14 @@ void LilyGo::display_settings()
                   WiFi.localIP().toString() + "\n"
                                               "-----\n";
     display_message(info);
+}
+
+void LilyGo::display_ticker(String ticker, String period, String interval)
+{
+    JsonObject ticker_data = yfapi.get_ticker_data(ticker, period, interval);
+    //Serial.println(ticker_data);
+    JsonObject ticker_meta = ticker_data["meta"];
+    String symbol = ticker_meta["symbol"];
+    float market_price = ticker_meta["regularMarketPrice"];
+    Serial.println(symbol + " - " + market_price);
 }
