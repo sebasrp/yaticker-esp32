@@ -13,7 +13,7 @@ void setup()
 {
   screen = LilyGo();
   screen.initialize();
-  screen.display_message("Hellow World");
+  screen.display_settings();
 }
 
 void loop()

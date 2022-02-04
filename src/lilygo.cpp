@@ -75,3 +75,13 @@ void LilyGo::display_message(String message)
     epd_draw_grayscale_image(epd_full_screen(), framebuffer); // Update the screen
     epd_poweroff_all();                                       // Switch off all power to EPD
 }
+
+void LilyGo::display_settings()
+{
+    String info = "Yaticker\n"
+                  "-----\n"
+                  "IP: " +
+                  WiFi.localIP().toString() + "\n"
+                                              "-----\n";
+    display_message(info);
+}

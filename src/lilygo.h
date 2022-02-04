@@ -18,6 +18,7 @@ public:
     LilyGo();
     void initialize();
     void display_message(String message);
+    void display_settings();
 };
 
 #endif
