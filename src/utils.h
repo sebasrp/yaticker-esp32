@@ -13,7 +13,6 @@ enum alignment
 
 void draw_text(uint8_t *framebuffer, String text, int x_offset, int y_offset, alignment align = LEFT, GFXfont font = FiraSans)
 {
-    Serial.println(String(__FILE__) + "\n Drawing string: " + text);
     char *data = const_cast<char *>(text.c_str());
     int x1, y1; //the bounds of x,y and w and h of the variable 'text' in pixels.
     int w, h;
