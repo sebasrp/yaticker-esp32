@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <Arduino.h>    // In-built
 #include "epd_driver.h" // In-built
 
@@ -26,3 +29,5 @@ void draw_text(uint8_t *framebuffer, String text, int x_offset, int y_offset, al
     Serial.println(String(__FILE__) + "\n Drawing string: " + text + ". x: " + x_offset + " y: " + cursor_y);
     write_string(&font, data, &x_offset, &cursor_y, framebuffer);
 }
+
+#endif
