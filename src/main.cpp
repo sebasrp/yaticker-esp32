@@ -1,9 +1,57 @@
-#include <Arduino.h>
+#include <Arduino.h>    // In-built
+#include "epd_driver.h" // In-built
 
-void setup() {
-  // put your setup code here, to run once:
+#include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson
+#include <HTTPClient.h>
+
+#include <SPI.h>  // In-built
+#include <time.h> // In-built
+#include <vector>
+#include <string>
+
+#include "firasans.h" // font
+
+#include <utils.h>
+
+#define SCREEN_WIDTH EPD_WIDTH
+#define SCREEN_HEIGHT EPD_HEIGHT
+
+// program constant and variables
+GFXfont currentFont;
+uint8_t *framebuffer;
+
+// should be moved to header file
+void edp_update();
+
+void setup()
+{
+  Serial.begin(115200);
+  while (!Serial)
+    ;
+  Serial.println(String(__FILE__) + "\nStarting...");
+  epd_init();
+
+  framebuffer = (uint8_t *)ps_calloc(sizeof(uint8_t), EPD_WIDTH * EPD_HEIGHT / 2);
+  if (!framebuffer)
+  {
+    Serial.println("Memory alloc failed!");
+    while (1)
+      ;
+  }
+  memset(framebuffer, 0xFF, EPD_WIDTH * EPD_HEIGHT / 2);
+  epd_poweron(); // Switch on EPD display
+  epd_clear();   // Clear the screen
+  draw_text(framebuffer, "Hello World", 0, 0, CENTER);
+  edp_update();
+  epd_poweroff_all(); // Switch off all power to EPD
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
+  // nothing here
+}
+
+void edp_update()
+{
+  epd_draw_grayscale_image(epd_full_screen(), framebuffer); // Update the screen
 }
