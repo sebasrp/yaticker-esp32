@@ -11,11 +11,13 @@ JsonObject YahooFinanceAPI::get_ticker_data(String ticker, String period, String
 {
     JsonObject result = JsonObject();
     HTTPClient http;
+    http.useHTTP10(true);
+    http.setTimeout(HTTP_TIMEOUT);
     http.begin(_base_url + ticker);
     int httpResponseCode = http.GET();
     if (httpResponseCode > 0)
     {
-        DynamicJsonDocument doc(8 * 1024);
+        DynamicJsonDocument doc(ESP.getMaxAllocHeap() - 2048);
         DeserializationError error = deserializeJson(doc, http.getStream());
         if (error)
         {

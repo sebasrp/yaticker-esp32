@@ -9,6 +9,7 @@ class YahooFinanceAPI
 private:
     String _base_url;
     String build_url(String ticker, String period, String interval);
+    static const unsigned long HTTP_TIMEOUT = 10000;
 
 public:
     YahooFinanceAPI();
